@@ -2,7 +2,20 @@ module Fastlane
   module Actions
     class BearychatAction < Action
       def self.run(params)
-        UI.message("The bearychat plugin is working!")
+        webhook = params[:webhook_url] || ENV['BEARYCHAT_WEBHOOK_URL']
+        # markdown = params[:markdown] || ENV['BEARYCHAT_MARKDOWN']
+        text = params[:text]
+        cmd = ['curl']
+        cmd << "'#{webhook}'"
+        cmd << '-X POST'
+        cmd << "-H 'Content-Type: application/json'"
+        # cmd << "-d 'payload={\"text\": \"#{text}\"}'"
+        cmd << '-d \'{'
+        cmd << "\"text\" : \"#{text}\", "
+        cmd << '"markdown" : true'
+        cmd << '}\''
+        cmd.join(' ')
+        sh cmd
       end
 
       def self.description
@@ -24,6 +37,19 @@ module Fastlane
 
       def self.available_options
         [
+          FastlaneCore::ConfigItem.new(
+            key: :webhook_url,
+            env_name: 'BEARYCHAT_WEBHOOK_URL',
+            description: 'webhook url of your bearychat channel',
+            optional: false,
+            type: String
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :text,
+            description: 'messages that sends to bearychat channel',
+            optional: false,
+            type: String
+          )
           # FastlaneCore::ConfigItem.new(key: :your_option,
           #                         env_name: "BEARYCHAT_YOUR_OPTION",
           #                      description: "A description of your option",

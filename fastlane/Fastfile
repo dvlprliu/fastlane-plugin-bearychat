@@ -1,3 +1,6 @@
 lane :test do
-  bearychat
+  bearychat(
+    webhook_url: '', # your bearychat webhook
+    text: '> **hello world**'
+  )
 end
