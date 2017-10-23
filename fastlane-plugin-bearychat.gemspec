@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'dvlprliu@gmail.com'
 
   spec.summary       = 'send messages to a bearychat channal'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-bearychat"
+  spec.homepage      = "https://github.com/dvlprliu/fastlane-plugin-bearychat"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
