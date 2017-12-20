@@ -14,8 +14,7 @@ module Fastlane
         cmd << "\"text\" : \"#{text}\", "
         cmd << '"markdown" : true'
         cmd << '}\''
-        cmd.join(' ')
-        sh cmd
+        sh cmd.join(' ')
       end
 
       def self.description
